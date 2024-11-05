@@ -7,6 +7,7 @@ import { ApolloServer } from "@apollo/server";
 import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer";
 import mergedResolvers from "./reslovers/index.js";
 import mergedTypeDefs from "./typeDefs/index.js";
+import { connectDB } from "./db/connectDB.js";
 
 dotenv.config();
 const app = express();
@@ -30,5 +31,5 @@ app.use(
 );
 
 await new Promise((resolve) => httpServer.listen({ port: 4000 }, resolve));
-
+await connectDB();
 console.log(`Server is running at port 4000`);
