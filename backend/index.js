@@ -71,4 +71,5 @@ app.use(
 
 await new Promise((resolve) => httpServer.listen({ port: 4000 }, resolve));
 await connectDB();
+console.log("hello");
 console.log(`Server is running at port 4000`);
