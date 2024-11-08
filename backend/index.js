@@ -31,7 +31,7 @@ const store = new MongoDBStore({
   collection: "session",
 });
 
-store.on("error", (err) => console.log(err));
+store.on("error", (err) => console.error(err));
 
 app.use(
   session({
@@ -58,7 +58,7 @@ const server = new ApolloServer({
 await server.start();
 
 app.use(
-  "/",
+  "/graphql",
   cors({
     origin: "http://localhost:3000",
     credentials: true,

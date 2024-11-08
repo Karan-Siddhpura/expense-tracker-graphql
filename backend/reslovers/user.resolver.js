@@ -1,4 +1,5 @@
 import bcrypt from "bcryptjs";
+import User from "../models/user.model.js";
 
 const userResolver = {
   Mutation: {
@@ -16,7 +17,6 @@ const userResolver = {
         const hashedPassword = await bcrypt.hash(password, salt);
         const boyProfilePic = `https://avatar.iran.liara.run/public/boy?username=${username}`;
         const girlProfilePic = `https://avatar.iran.liara.run/public/girl?username=${username}`;
-
         const newUser = new User({
           username,
           name,
@@ -35,6 +35,8 @@ const userResolver = {
     login: async (_, { input }, context) => {
       try {
         const { username, password } = input;
+
+        if (!username || !password) throw new Error("All fields are required");
         const { user } = await context.authenticate("graphql-local", {
           username,
           password,
@@ -42,22 +44,22 @@ const userResolver = {
         await context.login(user);
         return user;
       } catch (error) {
-        console.error(`Error in Login ${err}`);
-        throw new Error(err.message || "Internal server error");
+        console.error(`Error in Login ${error}`);
+        throw new Error(error.message || "Internal server error");
       }
     },
 
     logout: async (_, __, context) => {
       try {
         await context.logout();
-        req.session.destroy((err) => {
+        context.req.session.destroy((err) => {
           if (err) throw err;
         });
-        res.clearCookie("connect.sid");
+        context.res.clearCookie("connect.sid");
 
         return { message: "Logged out successfully" };
-      } catch (error) {
-        console.error(`Error in Logout ${err}`);
+      } catch (err) {
+        console.error("Error in logout:", err);
         throw new Error(err.message || "Internal server error");
       }
     },
