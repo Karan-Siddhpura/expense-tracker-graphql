@@ -1,6 +1,6 @@
 import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-
+import { useState } from "react";
 import Cards from "../components/Cards";
 import TransactionForm from "../components/TransactionForm";
 
@@ -10,23 +10,23 @@ import { useMutation } from "@apollo/client";
 import { LOGOUT } from "../graphql/mutations/user.mutation";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
-
 const HomePage = () => {
-  const chartData = {
-    labels: ["Saving", "Expense", "Investment"],
+  labels: ["Saving", "Expense", "Investment"];
+  const [chartData, setChartData] = useState({
+    labels: [],
     datasets: [
       {
         label: "%",
         data: [13, 8, 3],
         backgroundColor: [
-          "rgba(75, 192, 192)",
+          "rgba(75, 192,192)",
           "rgba(255, 99, 132)",
           "rgba(54, 162, 235)",
         ],
         borderColor: [
-          "rgba(75, 192, 192)",
+          "rgba(75, 192,192)",
           "rgba(255, 99, 132)",
-          "rgba(54, 162, 235, 1)",
+          "rgba(54, 162, 235)",
         ],
         borderWidth: 1,
         borderRadius: 30,
@@ -34,7 +34,7 @@ const HomePage = () => {
         cutout: 130,
       },
     ],
-  };
+  });
 
   const [logout, { loading }] = useMutation(LOGOUT, {
     refetchQueries: ["GetAuthenticatedUser"],
