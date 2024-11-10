@@ -22,7 +22,7 @@ const Card = ({ transaction }) => {
     transaction;
 
   const [deleteTransaction, { loading }] = useMutation(DELETE_TRANSACTION, {
-    refetchQueries: ["GetTransactions"],
+    refetchQueries: ["GetTransactions", "GetTransactionStatistics"],
   });
   description = description[0]?.toUpperCase() + description.slice(1);
   paymentType = paymentType[0]?.toUpperCase() + paymentType.slice(1);
@@ -36,8 +36,6 @@ const Card = ({ transaction }) => {
 
   const handDeleteTransaction = async () => {
     try {
-      console.log(transaction._id);
-
       await deleteTransaction({
         variables: { transactionId: transaction._id },
       });

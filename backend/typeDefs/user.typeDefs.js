@@ -7,6 +7,7 @@ type User {
     gender: String!
     username: String!
     name: String!
+    transactions: [Transaction!]
 }
 
 type Query {

@@ -5,4 +5,3 @@ export function formateDate(timestamp) {
 }
 const timestamp = 1704067200000;
 const formattedDate = formateDate(timestamp);
-console.log(formateDate);
