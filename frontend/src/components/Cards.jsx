@@ -9,11 +9,11 @@ import {
 const Cards = () => {
   const { data, loading, error } = useQuery(GET_TRANSACTIONS);
   const { data: authUser } = useQuery(GET_AUTHENTICATED_USER);
-  const { data: userAndTransactions } = useQuery(GET_USER_AND_TRANSACTIONS, {
-    variables: { userId: authUser?.authUser?._id },
-  });
+  // const { data: userAndTransactions } = useQuery(GET_USER_AND_TRANSACTIONS, {
+  //   variables: { userId: authUser?.authUser?._id },
+  // });
 
-  console.log(userAndTransactions);
+  // console.log(userAndTransactions);
 
   if (error) return <p>Error: {error.message}</p>;
   if (loading) return <p>Loading ...</p>;

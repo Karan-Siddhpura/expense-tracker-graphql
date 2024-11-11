@@ -77,18 +77,17 @@ const userResolver = {
     },
     user: async (_, { userId }) => {
       try {
-        const user = await User.findOneById(userId);
+        const user = await User.findById(userId);
         return user;
       } catch (error) {
-        console.error(`Error in user query ${err}`);
-        throw new Error(err.message || "Internal server error");
+        console.error(`Error in user query ${error}`);
+        throw new Error(error.message || "Internal server error");
       }
     },
   },
   User: {
     transactions: async (parent, _) => {
       try {
-        console.log(parent._id);
         const transactions = await Transaction.find({ userId: parent._id });
         return transactions;
       } catch (error) {

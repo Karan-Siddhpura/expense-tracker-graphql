@@ -24,7 +24,7 @@ export const GET_USER_AND_TRANSACTIONS = gql`
         paymentType
         category
         amount
-        loction
+        location
         date
       }
     }
